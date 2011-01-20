@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+# nova.py: a pygame demo which draws circles
+# Copyright 2011 Austin Pocus, see LICENSE for details
+
 import pygame
 from pygame.locals import *
 
