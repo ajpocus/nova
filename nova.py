@@ -22,31 +22,39 @@ class Circle:
 	    self.color = (255, 255, 0)	# yellow
 	else:
 	    self.color = (0, 0, 255)	# blue
+
 	left = origin[0] - radius
 	top = origin[1] + radius
 	width = height = radius*2
 	self.rect = pygame.Rect(left, top, width, height)
 
     def draw(self):
-	self.screen.fill((0, 0, 0))
+	self.screen.fill((0, 0, 0), rect=self.rect)
 	pygame.draw.circle(self.screen, self.color, self.origin, self.radius)
-	pygame.display.flip()
+	pygame.display.update(self.rect)
 
-def circle():
+def test():
     pygame.init()
     window = pygame.display.set_mode((640,480))
     screen = pygame.display.get_surface()
     black = (0,0,0)
     white = (255,255,255)
-    
+    circles = []
+
     while True:
 	for event in pygame.event.get():
 	    if event.type == MOUSEBUTTONDOWN and event.button == 1:
 		origin = pygame.mouse.get_pos()
+		radius = 1
+		circle = Circle(screen, origin, radius)
 	    if event.type == MOUSEMOTION and event.buttons[0] == 1:
 		pos = pygame.mouse.get_pos()
-		rad = abs(origin[0] - pos[0])
-		screen.fill(black)
-	        pygame.draw.circle(screen, white, origin, rad)
-		pygame.display.flip()
+		circle.radius = abs(origin[0] - pos[0])
+		circle.draw()
+	    if event.type == MOUSEBUTTONUP and event.button == 1 and circle:
+		circles.append(circle)
+		circle = False
+
+	for circle in circles:
+	    circle.draw()
 
