@@ -1,0 +1,4 @@
+This is the README for nova, by Austin Pocus. Nova is currently a simple pygame
+demo that I hope to build on further. The only function, circle(), takes no
+parameters and launches a pygame window, in which one can click and drag to
+make circles. More to come, stay tuned...
