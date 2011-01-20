@@ -23,13 +23,14 @@ class Circle:
 	else:
 	    self.color = (0, 0, 255)	# blue
 
-	left = origin[0] - radius
-	top = origin[1] + radius
-	width = height = radius*2
+    def get_rect(self):
+	left = self.origin[0] - self.radius
+	top = self.origin[1] + self.radius
+	width = height = self.radius * 2
 	self.rect = pygame.Rect(left, top, width, height)
 
     def draw(self):
-	self.screen.fill((0, 0, 0), rect=self.rect)
+	self.screen.fill((0, 0, 0), rect=self.get_rect())
 	pygame.draw.circle(self.screen, self.color, self.origin, self.radius)
 	pygame.display.update(self.rect)
 
@@ -40,8 +41,14 @@ def test():
     black = (0,0,0)
     white = (255,255,255)
     circles = []
+    circle = None
 
     while True:
+	try:
+	    circle
+	except NameError:
+	    circle = None
+
 	for event in pygame.event.get():
 	    if event.type == MOUSEBUTTONDOWN and event.button == 1:
 		origin = pygame.mouse.get_pos()
