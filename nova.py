@@ -55,6 +55,6 @@ def test():
 		circles.append(circle)
 		circle = False
 
-	for circle in circles:
-	    circle.draw()
+	for c in circles:
+	    c.draw()
 
