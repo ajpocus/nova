@@ -3,8 +3,34 @@
 # nova.py: a pygame demo which draws circles
 # Copyright 2011 Austin Pocus, see LICENSE for details
 
+# TODO: - write circle class
+#	- distill main logic into functions, possible circle methods
+#	- modify main logic to change properties of circle
+#	- upon mousebuttonup[0], save circle to permanent list
+
 import pygame
 from pygame.locals import *
+
+class Circle:
+    def __init__(self, screen, origin, radius):
+	self.screen = screen
+	self.origin = origin
+	self.radius = radius
+	if radius < 100:
+	    self.color = (255, 0, 0)	# red
+	elif radius < 300:
+	    self.color = (255, 255, 0)	# yellow
+	else:
+	    self.color = (0, 0, 255)	# blue
+	left = origin[0] - radius
+	top = origin[1] + radius
+	width = height = radius*2
+	self.rect = pygame.Rect(left, top, width, height)
+
+    def draw(self):
+	self.screen.fill((0, 0, 0))
+	pygame.draw.circle(self.screen, self.color, self.origin, self.radius)
+	pygame.display.flip()
 
 def circle():
     pygame.init()
